@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AuthState, LogInPayload } from '../types/authTypes';
+import { AuthState, LogIn } from '../types/authTypes';
 
 const initialState = {
   isUserLogged: false,
 };
 
 const reducers = {
-  logIn: (state: AuthState, action: LogInPayload) => (
+  logIn: (state: AuthState, action: PayloadAction<LogIn>) => (
     {...state, action}
   ),
   setIsUserLogged: (state: AuthState, action: PayloadAction<boolean>) => {
