@@ -1,8 +1,4 @@
-export interface Transaction {
-  transactor: string;
-  amount: number | string;
-  date: string;
-}
+import { Transaction } from "../../stores/types/transactionTypes";
 
 export interface TransactionProps {
   transaction: Transaction;
