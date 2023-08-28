@@ -60,8 +60,8 @@ const Header = (props: HeaderProps) => {
         >
           <Icon
             as={Feather}
-            name="list"
-            color="#EEEEEE"
+            name="more-vertical"
+            color="#090909"
             size={6}
           />
         </Pressable>
