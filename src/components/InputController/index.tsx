@@ -29,8 +29,6 @@ const InputController = (props: InputProps) => {
     label,
     placeholder,
     type,
-    errorMessage,
-    helperText,
     containerProps,
     leftElement,
     rightElement,
@@ -69,6 +67,7 @@ const InputController = (props: InputProps) => {
     },
     fieldState: {
       invalid,
+      error,
     },
   }: RenderInputProps) => (
     <FormControl
@@ -81,7 +80,7 @@ const InputController = (props: InputProps) => {
         {label}
       </FormControl.Label>
       <InputNB
-        onChange={onChange}
+        onChangeText={onChange}
         value={value}
         onBlur={onBlur}
         ref={customRef}
@@ -94,11 +93,8 @@ const InputController = (props: InputProps) => {
         type={type}
         {...rest}
       />
-      <FormControl.HelperText>
-        {helperText}
-      </FormControl.HelperText>
       <FormControl.ErrorMessage>
-        {errorMessage?.message}
+        {error?.message}
       </FormControl.ErrorMessage>
     </FormControl>
   );
