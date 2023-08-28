@@ -8,8 +8,3 @@ export interface Transaction {
 export interface TransactionState {
   transactions: Transaction[] | [];
 }
-
-export interface Callbacks {
-  successCallback?: () => void;
-  errorCallback?: () => void;
-}

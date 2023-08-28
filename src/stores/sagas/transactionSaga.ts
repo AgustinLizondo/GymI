@@ -5,12 +5,13 @@ import {
 } from 'redux-saga/effects';
 import transactionActions from '../slices/transactionSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { Callbacks, Transaction } from '../types/transactionTypes';
+import { Transaction } from '../types/transactionTypes';
 import {
   addTransaction as addTransactionService,
   getTransactions as getTransactionsService,
   removeTransaction as removeTransactionService,
 } from '../../services/transaction';
+import { Callbacks } from '../types';
 
 function* getTransactions(action: PayloadAction<Callbacks>) {
 

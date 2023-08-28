@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
-  Callbacks, Transaction, TransactionState,
+  Transaction,
+  TransactionState,
 } from '../types/transactionTypes';
+import { Callbacks } from '../types';
 
 const initialState = {
   transactions: [] as Transaction[],
