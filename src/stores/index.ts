@@ -10,6 +10,7 @@ import {
 import createSagaMiddleware from 'redux-saga';
 import { authReducer } from './slices/authSlice';
 import { transactionReducer } from './slices/transactionSlice';
+import { clientReducer } from './slices/clientsSlice';
 import rootSaga from './sagas';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,6 +27,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   transaction: transactionReducer,
+  client: clientReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
