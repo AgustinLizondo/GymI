@@ -1,18 +1,17 @@
 const defaultProps = {
-  variant: 'outline',
-  padding: 2,
+  variant: 'solid',
+  padding: 3,
   fontSize: 'md',
 };
 
-const outline = {
-  borderColor: 'primary.500',
-  borderWidth: 1,
+const solid = {
+  backgroundColor: '#E9E9E9',
 };
 
 const Button = {
   defaultProps,
   variants: {
-    outline,
+    solid,
   },
 };
 
