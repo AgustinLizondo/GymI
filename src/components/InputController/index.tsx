@@ -32,6 +32,7 @@ const InputController = (props: InputProps) => {
     errorMessage,
     helperText,
     containerProps,
+    leftElement,
     rightElement,
     keyboardType,
     ...rest
@@ -72,7 +73,6 @@ const InputController = (props: InputProps) => {
   }: RenderInputProps) => (
     <FormControl
       isInvalid={invalid}
-      flex={1}
       {...containerProps}
     >
       <FormControl.Label
@@ -86,6 +86,7 @@ const InputController = (props: InputProps) => {
         onBlur={onBlur}
         ref={customRef}
         placeholder={placeholder}
+        leftElement={leftElement}
         rightElement={isPasswordInput ? secureTextEntryElement : rightElement}
         secureTextEntry={isPasswordInput && !showPassword}
         onSubmitEditing={onSubmitEditing}
