@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/Home';
 import AddTransaction from '../screens/AddTransaction';
 import SearchClientsScreen from '../screens/SearchClients';
+import { Client } from '../stores/types/clientTypes';
 
 export type LoggedNavigatorParams = {
   HomeScreen: undefined;
@@ -11,7 +12,7 @@ export type LoggedNavigatorParams = {
     clientSelected?: string;
   };
   SearchClientsScreen: {
-    onClientItemPress?: () => void;
+    onClientItemPress: (client: Client) => void;
   };
 };
 

@@ -34,7 +34,11 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
 
   const {
     navigation,
-    onClientItemPress, // This has to be fixed
+    route: {
+      params: {
+        onClientItemPress,
+      },
+    },
   } = props;
 
   const dispatch = useDispatch();
@@ -54,13 +58,17 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
     }));
   }, [debouncedValue]);
 
-  const renderItem = (props: { item: Client }) => (
-    <ClientItem
-      onPress={() => onClientItemPress(props.item)}
-      marginBottom={2}
-      {...props.item}
-    />
-  );
+  const renderItem = (props: { item: Client }) => {
+
+    const onPress = () => onClientItemPress(props.item);
+
+    return (
+      <ClientItem
+        onPress={onPress}
+        marginBottom={2}
+        {...props.item}
+      />
+    );};
 
   return (
     <MainBox>
