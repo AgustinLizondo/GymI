@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }: HomeProps) => (
   <MainBox>
     <Header
       screenName="Home"
-      userName="Agustin Lizondo"
+      userName="John Doe"
       onBackPress={() => navigation.goBack()}
       onAvatarPress={() => console.log('Profile')}
     />
