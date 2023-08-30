@@ -35,6 +35,7 @@ const AddTransaction = (props: AddTransactionProps) => {
     formState: {
       isValid,
     },
+    trigger,
     setValue,
   } = useForm({
     mode: 'all',
@@ -60,6 +61,7 @@ const AddTransaction = (props: AddTransactionProps) => {
       onClientItemPress: (clientSelected: Client) => {
         setValue('client', `${clientSelected.firstName} ${clientSelected.lastName}`);
         navigation.goBack();
+        trigger('client');
       },
     });
     Keyboard.dismiss();

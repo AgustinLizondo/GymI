@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, {
+  useEffect,
+  useRef,
+} from 'react';
 
 // UI
-// import { View, Text } from 'native-base';
+import { Button } from 'native-base';
 import { FlashList } from '@shopify/flash-list';
 
 // Components
+import ActionSheet from 'react-native-actions-sheet';
 import Header from '../../components/Header';
 import Transaction from '../../components/Transaction';
 import MainBox from '../../components/MainBox';
-import RevenueBox from '../../components/RevenueBox';
+// import RevenueBox from '../../components/RevenueBox';
 
 // Types
 import { HomeProps } from './types';
@@ -24,14 +28,24 @@ import { apiDataFormatter } from '../../utils/api';
 import { GlobalState } from '../../stores/types';
 import { useDispatch, useSelector } from 'react-redux';
 
+// Styles
+import styles from './styles';
+
 const HomeScreen = ({ navigation }: HomeProps) => {
 
   const dispatch = useDispatch();
+  const actionSheetRef = useRef(null);
+
   const {
     transactions,
   } = useSelector((state: GlobalState) => state.transactions);
 
   const onBackPress = () => navigation.goBack();
+  const onAddTransactionPress = () => {
+    navigation.navigate('AddTransaction');
+    actionSheetRef.current.hide();
+  };
+  const onOptionsPress = () => actionSheetRef.current.show();
 
   useEffect(() => {
     dispatch(transactionsActions.getTransactions({}));
@@ -45,9 +59,23 @@ const HomeScreen = ({ navigation }: HomeProps) => {
 
   return (
     <MainBox>
+      <ActionSheet
+        ref={actionSheetRef}
+        containerStyle={styles.actionSheet}
+        headerAlwaysVisible
+      >
+        <Button
+          padding={2}
+          variant="link"
+          onPress={onAddTransactionPress}
+        >
+          Add transaction
+        </Button>
+      </ActionSheet>
       <Header
         screenName="Home"
         onBackPress={onBackPress}
+        onOptionsPress={onOptionsPress}
       />
       {/* <RevenueBox
         marginBottom={4}

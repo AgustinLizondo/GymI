@@ -27,13 +27,9 @@ const solid = {
 
 const link = {
   _text: {
-    fontFamily: 'SemiBold',
-    color: 'terciary.500',
+    fontFamily: 'Medium',
   },
   _pressed: {
-    _text: {
-      color: 'terciary.500',
-    },
     opacity: 0.5,
   },
 };

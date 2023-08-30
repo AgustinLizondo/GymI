@@ -8,6 +8,7 @@ const snakeToCamel = (snakeStr: string): string => snakeStr
 // This formatter has to be improved. It's not that efficient.
 
 export const apiDataFormatter = (data) => {
+  if (data === null) return data;
   if (typeof data === 'object') {
     if (Array.isArray(data)) {
       return data.map(item => apiDataFormatter(item));
