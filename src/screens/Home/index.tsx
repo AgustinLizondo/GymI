@@ -1,34 +1,64 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // UI
 // import { View, Text } from 'native-base';
+import { FlashList } from '@shopify/flash-list';
 
 // Components
 import Header from '../../components/Header';
 import Transaction from '../../components/Transaction';
 import MainBox from '../../components/MainBox';
+import RevenueBox from '../../components/RevenueBox';
 
 // Types
 import { HomeProps } from './types';
+import { Transaction as TransactionType } from '../../stores/types/transactionTypes';
 
-// Styles
+// Actions
+import transactionsActions from '../../stores/slices/transactionSlice';
 
-const HomeScreen = ({ navigation }: HomeProps) => (
-  <MainBox>
-    <Header
-      screenName="Home"
-      userName="John Doe"
-      onBackPress={() => navigation.goBack()}
-      onAvatarPress={() => console.log('Profile')}
-    />
+// Utils
+import { apiDataFormatter } from '../../utils/api';
+
+// State
+import { GlobalState } from '../../stores/types';
+import { useDispatch, useSelector } from 'react-redux';
+
+const HomeScreen = ({ navigation }: HomeProps) => {
+
+  const dispatch = useDispatch();
+  const {
+    transactions,
+  } = useSelector((state: GlobalState) => state.transactions);
+
+  const onBackPress = () => navigation.goBack();
+
+  useEffect(() => {
+    dispatch(transactionsActions.getTransactions({}));
+  }, [dispatch]);
+
+  const renderItem = (props: { item: TransactionType }) => (
     <Transaction
-      transaction={{
-        transactor: 'John Doe',
-        amount: 3500,
-        date: '2021-08-01',
-      }}
+      {...props.item}
     />
-  </MainBox>
-);
+  );
+
+  return (
+    <MainBox>
+      <Header
+        screenName="Home"
+        onBackPress={onBackPress}
+      />
+      {/* <RevenueBox
+        marginBottom={4}
+      /> */}
+      <FlashList
+        data={apiDataFormatter(transactions)}
+        estimatedItemSize={100}
+        renderItem={renderItem}
+      />
+    </MainBox>
+  );
+};
 
 export default HomeScreen;

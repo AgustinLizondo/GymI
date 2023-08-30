@@ -4,21 +4,33 @@ import { Transaction } from '../stores/types/transactionTypes';
 
 export const getTransactions = async () => await supabase
   .from('transactions')
-  .select('*');
+  .select(`
+  created_at,
+  transaction_amount,
+  client_id,
+    clients (
+      first_name,
+      last_name,
+      phone_number
+    )
+  `);
 
-export const addTransaction = async (transaction: Transaction) => {
+export const addTransaction = async (
+  transaction: Pick<Transaction, 'clients' | 'transactionAmount'>,
+) => {
   const {
-    transactor: transactor_name,
-    amount: transaction_amount,
+    clients: {
+      id: client_id,
+    },
+    transactionAmount: transaction_amount,
   } = transaction;
 
   const { data, error } = await supabase
     .from('transactions')
     .insert([
       {
-        transactor_name,
+        client_id,
         transaction_amount,
-        // company_id: userToken,
       },
     ])
     .select();

@@ -73,9 +73,7 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
   return (
     <MainBox>
       <Header
-        userName="John Doe"
         onBackPress={onBackPress}
-        onAvatarPress={() => {}}
         screenName="Search"
       />
       <Input
@@ -94,6 +92,7 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
       <FlashList
         data={apiDataFormatter(clients)}
         renderItem={renderItem}
+        estimatedItemSize={66}
         keyExtractor={(item: Client) => item.id?.toString()}
       />
     </MainBox>

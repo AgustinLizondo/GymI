@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 
 // Types
 import { AddTransactionProps } from './types';
+import { Client } from '../../stores/types/clientTypes';
 
 const AddTransaction = (props: AddTransactionProps) => {
 
@@ -34,6 +35,7 @@ const AddTransaction = (props: AddTransactionProps) => {
     formState: {
       isValid,
     },
+    setValue,
   } = useForm({
     mode: 'all',
     defaultValues: {
@@ -54,16 +56,19 @@ const AddTransaction = (props: AddTransactionProps) => {
   const onAmountInputSubmit = () => clientInputRef.current.focus();
 
   const onClientInputFocus = () => {
-    navigation.navigate('SearchClientsScreen');
+    navigation.navigate('SearchClientsScreen', {
+      onClientItemPress: (clientSelected: Client) => {
+        setValue('client', `${clientSelected.firstName} ${clientSelected.lastName}`);
+        navigation.goBack();
+      },
+    });
     Keyboard.dismiss();
   };
 
   return (
     <MainBox>
       <Header
-        onAvatarPress={() => {}}
         onBackPress={onBackPress}
-        userName="John Doe"
         screenName="Add Transaction"
       />
       <VStack
