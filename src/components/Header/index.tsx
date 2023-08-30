@@ -27,6 +27,7 @@ const Header = (props: HeaderProps) => {
     <HStack
       alignItems="center"
       justifyContent="space-between"
+      marginY={4}
     >
       <Pressable
         onPress={onBackPress}
