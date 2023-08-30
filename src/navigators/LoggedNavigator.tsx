@@ -26,7 +26,9 @@ const LoggedNavigator = () => (
   >
     <Stack.Screen name="HomeScreen" component={HomeScreen} />
     <Stack.Screen name="AddTransaction" component={AddTransaction} />
-    <Stack.Screen name="SearchClientsScreen" component={SearchClientsScreen} />
+    <Stack.Screen name="SearchClientsScreen" component={SearchClientsScreen} initialParams={{
+      onClientItemPress: () => void 0,
+    }}/>
   </Stack.Navigator>
 );
 

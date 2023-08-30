@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import { NativeBaseProvider, StatusBar } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import theme from '../../src/theme';
+import { GlobalState } from '../stores/types';
 
 const AppContainer = () => {
-  const isUserLogged = useSelector((state) => state.auth.isUserLogged); // type this to GlobalState
+  const isUserLogged = useSelector((state: GlobalState) => state.auth.isUserLogged);
 
   return (
     <NativeBaseProvider
