@@ -11,22 +11,31 @@ import {
 import Avatar from '../Avatar';
 
 //Types
-import { TransactionProps } from './types';
+import { Transaction as TransactionType } from '../../stores/types/transactionTypes';
 
 // Styles
 import styles from './styles';
 
-const Transaction = (props: TransactionProps) => {
+const Transaction = (props: TransactionType) => {
 
   const {
-    transaction:  {
-      transactor,
-      amount,
-      date,
+    clients: {
+      firstName,
+      lastName,
     },
+    transactionAmount,
+    createdAt,
   } = props;
 
-  const formattedAmount = amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  const fullName = `${firstName} ${lastName}`;
+  const formattedAmount = transactionAmount.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+  const date = new Date(createdAt).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+  });
 
   return (
     <HStack
@@ -34,13 +43,13 @@ const Transaction = (props: TransactionProps) => {
       space={4}
     >
       <Avatar
-        userName={transactor}
+        userName={fullName}
       />
       <View>
         <Text
           style={styles.transactionText}
         >
-          {transactor}
+          {fullName}
         </Text>
         <Text
           style={styles.dateText}
