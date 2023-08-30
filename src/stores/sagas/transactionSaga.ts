@@ -36,8 +36,8 @@ function* getTransactions(action: PayloadAction<Callbacks>) {
 
 function* addTransaction(action: PayloadAction<Transaction & Callbacks>) {
   const {
-    transactor,
-    amount,
+    clients,
+    transactionAmount,
     successCallback = () => null,
     errorCallback = () => null,
   } = action.payload;
@@ -46,8 +46,8 @@ function* addTransaction(action: PayloadAction<Transaction & Callbacks>) {
     // yield put(commonsActions.setIsLoading(true));
 
     yield call(addTransactionService, {
-      transactor,
-      amount,
+      clients,
+      transactionAmount,
     });
 
     yield call(successCallback);

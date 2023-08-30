@@ -5,14 +5,23 @@ const snakeToCamel = (snakeStr: string): string => snakeStr
       .replace('_', ''),
   );
 
-export const apiDataFormatter = (dataArray) => dataArray.map(
-  data => {
-    const newData = {};
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const newKey = snakeToCamel(key);
-        newData[newKey] = data[key];
+// This formatter has to be improved. It's not that efficient.
+
+export const apiDataFormatter = (data) => {
+  if (typeof data === 'object') {
+    if (Array.isArray(data)) {
+      return data.map(item => apiDataFormatter(item));
+    } else {
+      const newData = {};
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+          const newKey = snakeToCamel(key);
+          newData[newKey] = apiDataFormatter(data[key]);
+        }
       }
+      return newData;
     }
-    return newData;
-  });
+  } else {
+    return data;
+  }
+};
