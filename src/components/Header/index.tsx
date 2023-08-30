@@ -9,9 +9,6 @@ import {
 } from 'native-base';
 import { Feather } from '@expo/vector-icons';
 
-// Components
-import Avatar from '../Avatar';
-
 // Types
 import { HeaderProps } from './types';
 
@@ -22,8 +19,6 @@ const Header = (props: HeaderProps) => {
 
   const {
     screenName,
-    userName,
-    onAvatarPress,
     onOptionsPress,
     onBackPress,
   } = props;
@@ -48,24 +43,16 @@ const Header = (props: HeaderProps) => {
       >
         {screenName}
       </Text>
-      {!onOptionsPress && (
-        <Avatar
-          onPress={onAvatarPress}
-          userName={userName}
+      <Pressable
+        onPress={onOptionsPress}
+      >
+        <Icon
+          as={Feather}
+          name="more-vertical"
+          color="#090909"
+          size={6}
         />
-      )}
-      {onOptionsPress && (
-        <Pressable
-          onPress={onOptionsPress}
-        >
-          <Icon
-            as={Feather}
-            name="more-vertical"
-            color="#090909"
-            size={6}
-          />
-        </Pressable>
-      )}
+      </Pressable>
     </HStack>
   );};
 
