@@ -39,7 +39,7 @@ const InputController = (props: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const isPasswordInput = type === 'password';
-  const iconName = isPasswordInput ? 'eye' : 'eye-off';
+  const iconName = showPassword ? 'eye' : 'eye-off';
 
   const onEyePress = (): void => {
     setShowPassword(!showPassword);
