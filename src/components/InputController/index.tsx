@@ -52,9 +52,9 @@ const InputController = (props: InputProps) => {
     >
       <Icon
         as={Feather}
-        size={8}
+        size={4}
         name={iconName}
-        color="#333"
+        color="gray.400"
       />
     </Pressable>
   );
