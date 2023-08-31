@@ -12,8 +12,8 @@ export const getTransactions = async () => await supabase
       first_name,
       last_name,
       phone_number
-    )
-  `);
+    )`)
+  .range(0, 4);
 
 export const addTransaction = async (
   transaction: Pick<Transaction, 'clients' | 'transactionAmount'>,

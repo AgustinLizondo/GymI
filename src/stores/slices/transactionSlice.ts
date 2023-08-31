@@ -16,7 +16,9 @@ const reducers = {
   setTransactions: (state: TransactionState, action: PayloadAction<Transaction[]>) => {
     state.transactions = action.payload;
   },
-  addTransaction: (state: TransactionState, action: PayloadAction<Transaction & Callbacks>) => (
+  addTransaction: (state: TransactionState, action: PayloadAction<
+      Pick<Transaction, "clients" | "transactionAmount"> & Callbacks>,
+  ) => (
     {...state, action}
   ),
   removeTransaction: (state: TransactionState, action: PayloadAction<{id: number} & Callbacks>) => (

@@ -9,15 +9,17 @@ import {
   Input,
 } from 'native-base';
 import { Feather } from '@expo/vector-icons';
+import { FlashList } from '@shopify/flash-list';
 
 // Components
 import MainBox from '../../components/MainBox';
 import Header from '../../components/Header';
-import { FlashList } from '@shopify/flash-list';
 import ClientItem from '../../components/ClientItem';
 
 // State
 import { GlobalState } from '../../stores/types';
+
+// Actions
 import clientsActions from '../../stores/slices/clientsSlice';
 
 // Utils
@@ -28,7 +30,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // Types
 import { SearchClientsProps } from './types';
 import { Client } from '../../stores/types/clientTypes';
-
 
 const SearchClientsScreen = (props: SearchClientsProps) => {
 
