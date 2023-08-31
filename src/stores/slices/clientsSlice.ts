@@ -13,7 +13,7 @@ const reducers = {
   setClients: (state: ClientsState, action: PayloadAction<Client[]>) => {
     state.clients = action.payload;
   },
-  addClient: (state: ClientsState, action: PayloadAction<Client & Callbacks>) => (
+  addClient: (state: ClientsState, action: PayloadAction<Omit<Client, "id"> & Callbacks>) => (
     {...state, action}
   ),
   removeClient: (state: ClientsState, action: PayloadAction<{id: number} & Callbacks>) => (

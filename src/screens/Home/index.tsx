@@ -20,6 +20,7 @@ import { Transaction as TransactionType } from '../../stores/types/transactionTy
 
 // Actions
 import transactionsActions from '../../stores/slices/transactionSlice';
+import clientsActions from '../../stores/slices/clientsSlice';
 
 // Utils
 import { apiDataFormatter } from '../../utils/api';
@@ -46,6 +47,10 @@ const HomeScreen = ({ navigation }: HomeProps) => {
     actionSheetRef.current.hide();
   };
   const onOptionsPress = () => actionSheetRef.current.show();
+  const onAddClientPress = () => {
+    // navigation.navigate('AddClient');
+    actionSheetRef.current.hide();
+  };
 
   useEffect(() => {
     dispatch(transactionsActions.getTransactions({}));
@@ -70,6 +75,13 @@ const HomeScreen = ({ navigation }: HomeProps) => {
           onPress={onAddTransactionPress}
         >
           Add transaction
+        </Button>
+        <Button
+          padding={2}
+          variant="link"
+          onPress={onAddClientPress}
+        >
+          Add client
         </Button>
       </ActionSheet>
       <Header
