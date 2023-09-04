@@ -15,7 +15,7 @@ import { Feather } from '@expo/vector-icons';
 import MainBox from '../../components/MainBox';
 import Header from '../../components/Header';
 import InputController from '../../components/InputController';
-import ActionSheet from 'react-native-actions-sheet';
+import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 
 // Utils
 import { Keyboard } from 'react-native';
@@ -54,19 +54,27 @@ const AddTransaction = (props: AddTransactionProps) => {
     mode: 'all',
     defaultValues: {
       amount: '',
-      client: clientSelected || '',
+      client: '',
     },
   });
 
-  const clientInputRef = useRef(null);
-  const amountInputRef = useRef(null);
-  const actionSheetRef = useRef(null);
+  const clientInputRef = useRef<HTMLInputElement>(null);
+  const amountInputRef = useRef<HTMLInputElement>(null);
+  const actionSheetRef = useRef<ActionSheetRef>(null);
   const dispatch = useDispatch();
   const submitButtonDisabled = !isValid;
 
   const onBackPress = () => navigation.goBack();
-  const onOptionsPress = () => actionSheetRef.current.show();
-  const onAmountInputSubmit = () => clientInputRef.current.focus();
+  const onOptionsPress = () => {
+    if (actionSheetRef.current) {
+      actionSheetRef.current.show();
+    }
+  };
+  const onAmountInputSubmit = () => {
+    if (clientInputRef.current) {
+      clientInputRef.current.focus();
+    }
+  };
 
   const onClientInputFocus = () => {
     navigation.navigate('SearchClientsScreen', {
@@ -75,7 +83,9 @@ const AddTransaction = (props: AddTransactionProps) => {
         setValue('client', `${clientSelected.firstName} ${clientSelected.lastName}`);
         navigation.goBack();
         trigger('client');
-        actionSheetRef.current.show();
+        if (actionSheetRef.current) {
+          actionSheetRef.current.show();
+        }
       },
     });
     Keyboard.dismiss();
@@ -84,7 +94,9 @@ const AddTransaction = (props: AddTransactionProps) => {
   const onContinueButtonPress = () => {
 
     const successCallback = () => {
-      actionSheetRef.current.hide();
+      if (actionSheetRef.current) {
+        actionSheetRef.current.hide();
+      }
       reset();
     };
 

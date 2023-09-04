@@ -9,7 +9,7 @@ import { Client } from '../stores/types/clientTypes';
 export type LoggedNavigatorParams = {
   HomeScreen: undefined;
   AddTransaction: {
-    clientSelected?: string;
+    clientSelected: Client;
   };
   SearchClientsScreen: {
     onClientItemPress: (client: Client) => void;
@@ -25,7 +25,9 @@ const LoggedNavigator = () => (
     }}
   >
     <Stack.Screen name="HomeScreen" component={HomeScreen} />
-    <Stack.Screen name="AddTransaction" component={AddTransaction} />
+    <Stack.Screen name="AddTransaction" component={AddTransaction} initialParams={{
+      clientSelected: {} as Client,
+    }}/>
     <Stack.Screen name="SearchClientsScreen" component={SearchClientsScreen} initialParams={{
       onClientItemPress: () => void 0,
     }}/>

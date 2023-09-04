@@ -8,7 +8,7 @@ import { Button } from 'native-base';
 import { FlashList } from '@shopify/flash-list';
 
 // Components
-import ActionSheet from 'react-native-actions-sheet';
+import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 import Header from '../../components/Header';
 import Transaction from '../../components/Transaction';
 import MainBox from '../../components/MainBox';
@@ -35,7 +35,7 @@ import styles from './styles';
 const HomeScreen = ({ navigation }: HomeProps) => {
 
   const dispatch = useDispatch();
-  const actionSheetRef = useRef(null);
+  const actionSheetRef = useRef<ActionSheetRef>(null);
 
   const {
     transactions,
@@ -44,12 +44,20 @@ const HomeScreen = ({ navigation }: HomeProps) => {
   const onBackPress = () => navigation.goBack();
   const onAddTransactionPress = () => {
     navigation.navigate('AddTransaction');
-    actionSheetRef.current.hide();
+    if (actionSheetRef.current) {
+      actionSheetRef.current.hide();
+    }
   };
-  const onOptionsPress = () => actionSheetRef.current.show();
+  const onOptionsPress = () => {
+    if (actionSheetRef.current) {
+      actionSheetRef.current.show();
+    }
+  };
   const onAddClientPress = () => {
     // navigation.navigate('AddClient');
-    actionSheetRef.current.hide();
+    if (actionSheetRef.current) {
+      actionSheetRef.current.hide();
+    }
   };
 
   useEffect(() => {
