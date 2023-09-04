@@ -2,7 +2,7 @@ export interface AuthState {
   isUserLogged: boolean;
 }
 
-export interface LogIn {
+export interface SignIn {
   email: string;
   password: string;
 }
