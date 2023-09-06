@@ -12,7 +12,7 @@ import {
   signOut as signOutService,
 } from '../../services/auth';
 
-function* signIn(action: PayloadAction<SignIn & Callbacks>) {
+function* signIn(action: PayloadAction<SignIn>) {
 
   const {
     email,
@@ -31,7 +31,7 @@ function* signIn(action: PayloadAction<SignIn & Callbacks>) {
 
     yield call(successCallback);
   } catch (error) {
-    yield call(errorCallback);
+    yield call(errorCallback, error.message);
   } finally {
     // yield put(commonsActions.setIsLoading(false));
   }

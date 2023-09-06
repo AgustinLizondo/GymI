@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const reducers = {
-  signIn: (state: AuthState, action: PayloadAction<SignIn & Callbacks>) => (
+  signIn: (state: AuthState, action: PayloadAction<SignIn>) => (
     {...state, action}
   ),
   signOut: (state: AuthState, action: PayloadAction<Callbacks>) => (
