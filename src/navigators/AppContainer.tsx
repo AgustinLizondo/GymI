@@ -16,7 +16,7 @@ const AppContainer = () => {
     >
       <StatusBar barStyle="dark-content" backgroundColor="white" />
       <NavigationContainer>
-        {!isUserLogged ? (
+        {isUserLogged ? (
           <LoggedNavigator />
         ) : (
           <AuthNavigator />

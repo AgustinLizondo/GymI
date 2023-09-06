@@ -9,7 +9,7 @@ import { Client } from '../stores/types/clientTypes';
 export type LoggedNavigatorParams = {
   HomeScreen: undefined;
   AddTransaction: {
-    clientSelected: Client;
+    clientSelected?: Client;
   };
   SearchClientsScreen: {
     onClientItemPress: (client: Client) => void;

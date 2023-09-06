@@ -1,9 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LoginScreen from '../screens/Login';
+import SignInScreen from '../screens/SignIn';
 
-const Stack = createNativeStackNavigator();
+export type AuthNavigatorParams = {
+  SignInScreen: undefined;
+};
+
+const Stack = createNativeStackNavigator<AuthNavigatorParams>();
 
 const AuthNavigator = () => (
   <Stack.Navigator
@@ -11,7 +15,7 @@ const AuthNavigator = () => (
       headerShown: false,
     }}
   >
-    <Stack.Screen name="LoginScreen" component={LoginScreen} />
+    <Stack.Screen name="SignInScreen" component={SignInScreen} />
   </Stack.Navigator>
 );
 
