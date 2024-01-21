@@ -3,12 +3,12 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     padding: 8,
-    backgroundColor: '#E9E9E9',
+    backgroundColor: '#212121',
     borderRadius: 12,
   },
   boldText: {
     fontFamily: 'Bold',
-    fontSize: 20,
+    fontSize: 18,
   },
   innerContainer: {
     flex: 1,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'Medium',
-    fontSize: 16,
+    fontSize: 14,
     padding: 4,
   },
   text: {

@@ -29,31 +29,40 @@ const Header = (props: HeaderProps) => {
       justifyContent="space-between"
       marginY={4}
     >
-      <Pressable
-        onPress={onBackPress}
+      <HStack
+        alignItems="center"
+        space={2}
       >
-        <Icon
-          as={Feather}
-          name="chevron-left"
-          color="#090909"
-          size={6}
-        />
-      </Pressable>
-      <Text
-        style={styles.screenName}
-      >
-        {screenName}
-      </Text>
-      <Pressable
-        onPress={onOptionsPress}
-      >
-        <Icon
-          as={Feather}
-          name="more-vertical"
-          color="#090909"
-          size={6}
-        />
-      </Pressable>
+        {onBackPress && (
+          <Pressable
+            onPress={onBackPress}
+          >
+            <Icon
+              as={Feather}
+              name="chevron-left"
+              color="#FFFFFF"
+              size={6}
+            />
+          </Pressable>
+        )}
+        <Text
+          style={styles.screenName}
+        >
+          {screenName}
+        </Text>
+      </HStack>
+      {onOptionsPress && (
+        <Pressable
+          onPress={onOptionsPress}
+        >
+          <Icon
+            as={Feather}
+            name="more-vertical"
+            color="#FFFFFF"
+            size={6}
+          />
+        </Pressable>
+      )}
     </HStack>
   );};
 

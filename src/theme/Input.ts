@@ -2,17 +2,19 @@ const defaultProps = {
   variant: 'solid',
   padding: 3,
   fontSize: 'md',
+  color: '#FFFFFF',
+  placeholderTextColor: '#AAAAAA',
 };
 
 const solid = {
-  backgroundColor: '#E9E9E9',
+  backgroundColor: '#3D3D3D',
 };
 
-const Button = {
+const Input = {
   defaultProps,
   variants: {
     solid,
   },
 };
 
-export default Button;
+export default Input;

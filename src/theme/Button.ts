@@ -1,5 +1,5 @@
 const baseStyle = {
-  rounded: 'xl',
+  rounded: 'sm',
 };
 
 const defaultProps = {
@@ -10,8 +10,9 @@ const defaultProps = {
 };
 
 const solid = {
+  bg: '#3D3D3D',
   _disabled: {
-    bg: '#1A1A1B',
+    bg: '#AAAAAA',
     _text: {
       color: 'white',
     },
@@ -27,15 +28,19 @@ const solid = {
 
 const link = {
   _text: {
+    color: '#FFFFFF',
     fontFamily: 'Medium',
   },
   _pressed: {
     opacity: 0.5,
+    _text: {
+      color: '#FFFFFF',
+    },
   },
 };
 
 const outline = {
-  borderColor: 'primary.500',
+  borderColor: '#3D3D3D',
   borderWidth: 2,
 };
 
