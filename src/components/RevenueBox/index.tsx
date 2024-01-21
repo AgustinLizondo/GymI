@@ -36,7 +36,7 @@ const RevenueBox = (props: RevenueBoxProps) => {
       <Text
         style={styles.title}
       >
-        Last week revenue
+        Current month revenue
       </Text>
       <HStack>
         <VStack
@@ -44,6 +44,7 @@ const RevenueBox = (props: RevenueBoxProps) => {
         >
           <Text
             style={styles.boldText}
+            noOfLines={1}
           >
             {formattedAmount}
           </Text>

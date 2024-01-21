@@ -10,4 +10,7 @@ export interface Transaction {
 
 export interface TransactionState {
   transactions: Transaction[] | [];
+  grossRevenue: number;
+  chargedSubscriptions: number;
+  totalClients: number;
 }

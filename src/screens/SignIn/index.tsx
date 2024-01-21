@@ -9,19 +9,19 @@ import {
 import MainBox from '../../components/MainBox';
 import InputController from '../../components/InputController';
 
-// Actions
+// State
 import authActions from '../../stores/slices/authSlice';
+import { useDispatch } from '../../stores/hooks';
 
 // Utils
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { emailRegex } from '../../utils/regex';
 
 // Types
 // import { SignInProps } from './types';
 
 // Styles
 import styles from './styles';
-import { emailRegex } from '../../utils/regex';
 
 const SignInScreen = () => {
 

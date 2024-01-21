@@ -13,6 +13,9 @@ import Avatar from '../Avatar';
 //Types
 import { Transaction as TransactionType } from '../../stores/types/transactionTypes';
 
+// Utils
+import { MonthsEnum } from '../../utils/enum';
+
 // Styles
 import styles from './styles';
 
@@ -20,22 +23,20 @@ const Transaction = (props: TransactionType) => {
 
   const {
     clients: {
-      firstName,
-      lastName,
+      name,
     },
     transactionAmount,
     createdAt,
   } = props;
 
-  const fullName = `${firstName} ${lastName}`;
   const formattedAmount = transactionAmount.toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   });
-  const date = new Date(createdAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-  });
+  const month = Number(createdAt.slice(5, 7)) - 1;
+  const day = createdAt.slice(8, 10);
+
+  const date = `${MonthsEnum[month]} ${day}`;
 
   return (
     <HStack
@@ -43,13 +44,13 @@ const Transaction = (props: TransactionType) => {
       space={4}
     >
       <Avatar
-        userName={fullName}
+        userName={name}
       />
       <View>
         <Text
           style={styles.transactionText}
         >
-          {fullName}
+          {name}
         </Text>
         <Text
           style={styles.dateText}

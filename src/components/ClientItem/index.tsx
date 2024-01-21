@@ -17,14 +17,11 @@ import { ClientItemProps } from './types';
 const ClientItem = (props: ClientItemProps) => {
 
   const {
-    firstName,
-    lastName,
+    name,
     phoneNumber,
     onPress,
     ...rest
   } = props;
-
-  const fullName = `${firstName} ${lastName}`;
 
   return (
     <Pressable
@@ -37,13 +34,13 @@ const ClientItem = (props: ClientItemProps) => {
         space={2}
       >
         <Avatar
-          userName={fullName}
+          userName={name}
         />
         <VStack>
           <Text
             style={styles.userName}
           >
-            {fullName}
+            {name}
           </Text>
           <Text
             style={styles.phoneNumber}

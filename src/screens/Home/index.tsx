@@ -12,22 +12,21 @@ import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 import Header from '../../components/Header';
 import Transaction from '../../components/Transaction';
 import MainBox from '../../components/MainBox';
-// import RevenueBox from '../../components/RevenueBox';
+import RevenueBox from '../../components/RevenueBox';
 
 // Types
 import { HomeProps } from './types';
 import { Transaction as TransactionType } from '../../stores/types/transactionTypes';
 
-// Actions
+// State
+import { useDispatch, useSelector } from '../../stores/hooks';
 import transactionsActions from '../../stores/slices/transactionSlice';
-import clientsActions from '../../stores/slices/clientsSlice';
+import authActions from '../../stores/slices/authSlice';
+// import clientsActions from '../../stores/slices/clientsSlice';
 
 // Utils
 import { apiDataFormatter } from '../../utils/api';
-
-// State
-import { GlobalState } from '../../stores/types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 // Styles
 import styles from './styles';
@@ -36,33 +35,56 @@ const HomeScreen = ({ navigation }: HomeProps) => {
 
   const dispatch = useDispatch();
   const actionSheetRef = useRef<ActionSheetRef>(null);
+  const isFocused = useIsFocused();
 
   const {
     transactions,
-  } = useSelector((state: GlobalState) => state.transactions);
+    grossRevenue,
+    chargedSubscriptions,
+    totalClients,
+  } = useSelector((state) => state.transactions);
 
-  const onBackPress = () => navigation.goBack();
   const onAddTransactionPress = () => {
     navigation.navigate('AddTransaction');
     if (actionSheetRef.current) {
       actionSheetRef.current.hide();
     }
   };
+
+  const onSignOutPress = () => {
+    const successCallback = () => dispatch(
+      authActions.setIsUserLogged(false),
+    );
+
+    dispatch(authActions.signOut({
+      successCallback,
+    }));
+    if (actionSheetRef.current) {
+      actionSheetRef.current.hide();
+    }
+  };
+
   const onOptionsPress = () => {
     if (actionSheetRef.current) {
       actionSheetRef.current.show();
     }
   };
+
   const onAddClientPress = () => {
-    // navigation.navigate('AddClient');
+    navigation.navigate('AddClient');
     if (actionSheetRef.current) {
       actionSheetRef.current.hide();
     }
   };
 
   useEffect(() => {
-    dispatch(transactionsActions.getTransactions({}));
-  }, [dispatch]);
+    dispatch(
+      transactionsActions.getTransactions({}),
+    );
+    dispatch(
+      transactionsActions.getRevenue({}),
+    );
+  }, [dispatch, isFocused]);
 
   const renderItem = (props: { item: TransactionType }) => (
     <Transaction
@@ -73,8 +95,8 @@ const HomeScreen = ({ navigation }: HomeProps) => {
   return (
     <MainBox>
       <ActionSheet
-        ref={actionSheetRef}
         containerStyle={styles.actionSheet}
+        ref={actionSheetRef}
         headerAlwaysVisible
       >
         <Button
@@ -91,15 +113,24 @@ const HomeScreen = ({ navigation }: HomeProps) => {
         >
           Add client
         </Button>
+        <Button
+          padding={2}
+          variant="link"
+          onPress={onSignOutPress}
+        >
+          Sign out
+        </Button>
       </ActionSheet>
       <Header
         screenName="Home"
-        onBackPress={onBackPress}
         onOptionsPress={onOptionsPress}
       />
-      {/* <RevenueBox
+      <RevenueBox
         marginBottom={4}
-      /> */}
+        grossRevenue={grossRevenue}
+        chargedSubscriptions={chargedSubscriptions}
+        totalClients={totalClients}
+      />
       <FlashList
         data={apiDataFormatter(transactions)}
         estimatedItemSize={100}

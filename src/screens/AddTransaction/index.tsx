@@ -20,9 +20,9 @@ import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 // Utils
 import { Keyboard } from 'react-native';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 
-// Actions
+// State
+import { useDispatch } from '../../stores/hooks';
 import transactionActions from '../../stores/slices/transactionSlice';
 
 // Types
@@ -30,7 +30,7 @@ import { AddTransactionProps } from './types';
 import { Client } from '../../stores/types/clientTypes';
 
 // Styles
-import styles from '../Home/styles';
+import styles from './styles';
 
 const AddTransaction = (props: AddTransactionProps) => {
 
@@ -80,7 +80,7 @@ const AddTransaction = (props: AddTransactionProps) => {
     navigation.navigate('SearchClientsScreen', {
       onClientItemPress: (clientSelected: Client) => {
         setClientSelected(clientSelected);
-        setValue('client', `${clientSelected.firstName} ${clientSelected.lastName}`);
+        setValue('client', clientSelected.name);
         navigation.goBack();
         trigger('client');
         if (actionSheetRef.current) {
@@ -91,7 +91,7 @@ const AddTransaction = (props: AddTransactionProps) => {
     Keyboard.dismiss();
   };
 
-  const onContinueButtonPress = () => {
+  const onSaveButtonPress = () => {
 
     const successCallback = () => {
       if (actionSheetRef.current) {
@@ -115,13 +115,13 @@ const AddTransaction = (props: AddTransactionProps) => {
   return (
     <MainBox>
       <ActionSheet
-        ref={actionSheetRef}
         containerStyle={styles.actionSheet}
+        ref={actionSheetRef}
         headerAlwaysVisible
       >
         <Button
           isDisabled={submitButtonDisabled}
-          onPress={onContinueButtonPress}
+          onPress={onSaveButtonPress}
           variant="link"
           padding={2}
         >
@@ -148,7 +148,7 @@ const AddTransaction = (props: AddTransactionProps) => {
           rules={{
             required: {
               value: true,
-              message: 'El campo es requerido',
+              message: 'This field is required',
             },
           }}
         />
@@ -169,7 +169,7 @@ const AddTransaction = (props: AddTransactionProps) => {
           rules={{
             required: {
               value: true,
-              message: 'El campo es requerido',
+              message: 'This field is required',
             },
           }}
         />

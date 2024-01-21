@@ -1,21 +1,38 @@
 import React from 'react';
+
+// Navigators
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import LoggedNavigator from './LoggedNavigator';
 import AuthNavigator from './AuthNavigator';
-import { useSelector } from 'react-redux';
+
+// UI
 import { NativeBaseProvider, StatusBar } from 'native-base';
-import { NavigationContainer } from '@react-navigation/native';
+
+// State
+import { useSelector } from '../stores/hooks';
+
+// Theme
 import theme from '../../src/theme';
-import { GlobalState } from '../stores/types';
+
+const navTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#181818',
+  },
+};
 
 const AppContainer = () => {
-  const isUserLogged = useSelector((state: GlobalState) => state.auth.isUserLogged);
+  const isUserLogged = useSelector((state) => state.auth.isUserLogged);
 
   return (
     <NativeBaseProvider
       theme={theme}
     >
       <StatusBar barStyle="dark-content" backgroundColor="white" />
-      <NavigationContainer>
+      <NavigationContainer
+        theme={navTheme}
+      >
         {isUserLogged ? (
           <LoggedNavigator />
         ) : (

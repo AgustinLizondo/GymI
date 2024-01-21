@@ -5,6 +5,7 @@ import HomeScreen from '../screens/Home';
 import AddTransaction from '../screens/AddTransaction';
 import SearchClientsScreen from '../screens/SearchClients';
 import { Client } from '../stores/types/clientTypes';
+import AddClient from '../screens/AddClient';
 
 export type LoggedNavigatorParams = {
   HomeScreen: undefined;
@@ -14,6 +15,7 @@ export type LoggedNavigatorParams = {
   SearchClientsScreen: {
     onClientItemPress: (client: Client) => void;
   };
+  AddClient: undefined;
 };
 
 const Stack = createNativeStackNavigator<LoggedNavigatorParams>();
@@ -25,12 +27,21 @@ const LoggedNavigator = () => (
     }}
   >
     <Stack.Screen name="HomeScreen" component={HomeScreen} />
-    <Stack.Screen name="AddTransaction" component={AddTransaction} initialParams={{
-      clientSelected: {} as Client,
-    }}/>
-    <Stack.Screen name="SearchClientsScreen" component={SearchClientsScreen} initialParams={{
-      onClientItemPress: () => void 0,
-    }}/>
+    <Stack.Screen name="AddTransaction" component={AddTransaction}
+      initialParams={{
+        clientSelected: {} as Client,
+      }}
+      options={{
+        gestureDirection: 'vertical',
+      }}/>
+    <Stack.Screen name="SearchClientsScreen" component={SearchClientsScreen}
+      initialParams={{
+        onClientItemPress: () => void 0,
+      }}/>
+    <Stack.Screen name="AddClient" component={AddClient}
+      options={{
+        gestureDirection: 'vertical',
+      }}/>
   </Stack.Navigator>
 );
 

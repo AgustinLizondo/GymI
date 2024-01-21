@@ -1,5 +1,5 @@
 export interface HeaderProps {
   screenName: string;
-  onBackPress: () => void;
+  onBackPress?: () => void;
   onOptionsPress?: () =>void;
 }

@@ -5,8 +5,11 @@ import React, {
 
 // UI
 import {
+  Button,
   Icon,
   Input,
+  Text,
+  View,
 } from 'native-base';
 import { Feather } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
@@ -17,19 +20,19 @@ import Header from '../../components/Header';
 import ClientItem from '../../components/ClientItem';
 
 // State
-import { GlobalState } from '../../stores/types';
-
-// Actions
+import { useDispatch, useSelector } from '../../stores/hooks';
 import clientsActions from '../../stores/slices/clientsSlice';
 
 // Utils
 import { apiDataFormatter } from '../../utils/api';
 import { useDebounceValue } from '../../hooks/useDebounceValue';
-import { useDispatch, useSelector } from 'react-redux';
 
 // Types
 import { SearchClientsProps } from './types';
 import { Client } from '../../stores/types/clientTypes';
+
+// Styles
+import styles from './styles';
 
 const SearchClientsScreen = (props: SearchClientsProps) => {
 
@@ -44,23 +47,22 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
-
   const {
     clients,
-  } = useSelector((state: GlobalState) => state.clients);
+  } = useSelector((state) => state.clients);
 
   const debouncedValue = useDebounceValue(search);
 
   const onBackPress = () => navigation.goBack();
+  const onAddClientPress = () => navigation.navigate('AddClient');
 
   useEffect(() => {
     dispatch(clientsActions.getClients({
       name: debouncedValue,
     }));
-  }, [debouncedValue]);
+  }, [dispatch, debouncedValue]);
 
   const renderItem = (props: { item: Client }) => {
-
     const onPress = () => onClientItemPress(props.item);
 
     return (
@@ -69,7 +71,24 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
         marginBottom={2}
         {...props.item}
       />
-    );};
+    );
+  };
+
+  const renderEmptyComponent = () => (
+    <View
+      style={styles.emptyComponentContainer}
+    >
+      <Text>
+        No clients were added yet
+      </Text>
+      <Button
+        variant="link"
+        onPress={onAddClientPress}
+      >
+        Add one now!
+      </Button>
+    </View>
+  );
 
   return (
     <MainBox>
@@ -94,6 +113,7 @@ const SearchClientsScreen = (props: SearchClientsProps) => {
         data={apiDataFormatter(clients)}
         renderItem={renderItem}
         estimatedItemSize={66}
+        ListEmptyComponent={renderEmptyComponent}
         keyExtractor={(item: Client) => item.id?.toString()}
       />
     </MainBox>
